@@ -88,7 +88,7 @@ Initialization options and simple sample usage.
         {
             // Will load all configuration methods explicitly defined in the parameter list.
             Configure.TheEnvironment()
-                .ByLoadingTheConfigurationMethods(
+                .ByLoadingConfigurationMethods(
                     typeof(WindowsRegistryConfigurationMethod),
                     typeof(AppConfigConfigurationMethod),
                     typeof(MyCustomDatabaseConfigurationMethod));
