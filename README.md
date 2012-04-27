@@ -1,7 +1,22 @@
 Softweyr.Configuration
 ======================
 
-Sample set up of a configuration class.
+Simple configuration implementation.
+
+<pre><code>namespace Softweyr.Configuration.Samples
+{
+    using Softweyr.Configuration;
+
+    public interface IMySampleConfiguration
+    {
+        // This configuration property will contain the value of the key-value pair with the key
+        // "SimpleConfigValueKey" specified in the App.Config / Web.Config file's appSettings section.
+        [ConfigurableFromAppConfig("SimpleConfigValueKey")]
+        int MyConfigurableValue { get; set; }
+    }
+}</code></pre>
+
+Complex configuration implementation.
 
 <pre><code>namespace Softweyr.Configuration.Samples
 {
