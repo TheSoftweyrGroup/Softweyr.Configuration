@@ -25,7 +25,7 @@ Simple configuration by attributes implementation.
     {
         // This configuration property will contain the value of the key-value pair with the key
         // "SimpleConfigValueKey" specified in the App.Config / Web.Config file's appSettings section.
-        [ConfigurableFromAppConfig("SimpleConfigValueKey")]
+        [ConfigureFromAppConfig("SimpleConfigValueKey")]
         int MyConfigurableValue { get; set; }
     }
 }</code></pre>
@@ -44,22 +44,22 @@ Complex configuration by attributes implementation.
 
         // This configuration property will contain the value of the key-value pair with the key
         // "SimpleConfigValueKey" specified in the App.Config / Web.Config file's appSettings section.
-        [ConfigurableFromAppConfig("SimpleConfigValueKey")]
+        [ConfigureFromAppConfig("SimpleConfigValueKey")]
         public int MyConfigurableValue { get; set; }
 
         // This configuration property will try to be populated from the windows registry key if it exists,
         // if not, it will try to get the value from the AppConfigValueKey appSetting in the Web.Config
         //  / App.Config file for the current ApplicationDomain, if this is also missing then it will
         // default to "No Value Set.".
-        [ConfigurableFromWindowsRegistry(1, "LOCALMACHINE|Software|Softweyr|Sample")]
-        [ConfigurableFromAppConfig(2, "AppConfigKeyValue")]
+        [ConfigureFromWindowsRegistry(1, "LOCALMACHINE|Software|Softweyr|Sample")]
+        [ConfigureFromAppConfig(2, "AppConfigKeyValue")]
         [DefaultTo("No value set.")]
         public string MyAverageConfigurationValue { get; set; }
         
         // This configuration property will try to be populated from the App.Config / Web.Config file but
         // will use a custom parser to get the value.
         // Note: Example of MyCustomClassAppConfigExtraction class is given later.
-        [ConfigurableFromAppConfig(1, "AppConfigKeyValue", , typeof(MyCustomClassAppConfigExtraction))]
+        [ConfigureFromAppConfig("AppConfigKeyValue", , typeof(MyCustomClassAppConfigExtraction))]
         public MyCustomClass MyConfigurableValue { get; set; }
         
         // This configuration value will never be initialized and will simply hold the default value for
