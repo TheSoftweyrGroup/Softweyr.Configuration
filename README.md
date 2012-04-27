@@ -33,7 +33,8 @@ Sample set up of a configuration class.
         [ConfigurableFromAppConfig(1, "AppConfigKeyValue", , typeof(MyCustomClassAppConfigExtraction))]
         public MyCustomClass MyConfigurableValue { get; set; }
         
-        // This configuration value will never be initialized and will simply hold the default value for the property type.
+        // This configuration value will never be initialized and will simply hold the default value for
+        // the property type.
         public int MyConfigurableValue { get; set; }
     }
 }</code></pre>
@@ -46,26 +47,37 @@ Initialization options and simple sample usage.
 {
     using Softweyr.Configuration;
 
-public class Example
-{
-    public void ImplicitInitialization()
+    public class Example
     {
-        Configure.LoadConfigurationMethodsImplicitly();
-    }
+        public void ImplicitInitialization()
+        {
+            // Will load all configuration methods currently referenced in the app domain.
+            Configure.LoadConfigurationMethodsImplicitly();
+        }
     
-    public void ExplicitInitialization()
-    {
-        Configure
-            .LoadConfigurationMethod(typeof(WindowsRegistryConfigurationMethod))
-            .LoadConfigurationMethod(typeof(AppConfigConfigurationMethod))
-            .LoadConfigurationMethod(typeof(WebConfigConfigurationMethod));
-    }
-    
-    public void UsageSampleOne()
-    {
-        Configure.Get<MySampleConfiguration>();
+        public void ExplicitInitialization()
+        {
+            // Will load all configuration methods explicitly defined in the parameter list.
+            Configure
+                .LoadConfigurationMethods(
+                    typeof(WindowsRegistryConfigurationMethod),
+                    typeof(AppConfigConfigurationMethod),
+                    typeof(MyCustomDatabaseConfigurationMethod))
+        }
     }
 }</code></pre>
+
+Simple usage example
+
+<pre><code>var myConfiguration = Configure.Get&lt;MySampleConfiguration&gt;();
+Console.WriteLine(myConfiguration.MyConfigurableValue);</code></pre>
+
+Commiting changes to configuration
+
+<pre><code>var myConfiguration = Configure.Get&lt;MySampleConfiguration&gt;();
+myConfiguration.MyConfigurableValue = "Hello World";
+Configure.Save(myConfiguration);
+</code></pre>
 
 Example usage with Ninject
 
@@ -76,7 +88,7 @@ Example usage with Ninject
     
     public class MyDependantClass
     {
-        MySampleConfiguration configuration;
+        public MySampleConfiguration configuration;
     
         public MyDependantClass(MySampleConfiguration configuration)
         {
@@ -88,5 +100,6 @@ Example usage with Ninject
     {
         Configure.LoadConfigurationMethodsImplicitly().RegisterConfigurationsWithNinject();
         var myDependantClass = kernal.Resolve<MyDependantClass>();
+        Console.WriteLine(myDependantClass.Configuration.MyConfigurableValue);
     }
 }</code></pre>
