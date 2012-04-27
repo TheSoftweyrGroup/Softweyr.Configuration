@@ -1,7 +1,7 @@
 Softweyr.Configuration
 ======================
 
-Simple configuration implementation.
+Simple configuration by attributes implementation.
 
 <pre><code>namespace Softweyr.Configuration.Samples
 {
@@ -16,7 +16,7 @@ Simple configuration implementation.
     }
 }</code></pre>
 
-Complex configuration implementation.
+Complex configuration by attributes implementation.
 
 <pre><code>namespace Softweyr.Configuration.Samples
 {
@@ -67,17 +67,17 @@ Initialization options and simple sample usage.
         public void ImplicitInitialization()
         {
             // Will load all configuration methods currently referenced in the app domain.
-            Configure.LoadConfigurationMethodsImplicitly();
+            Configure.TheEnvironment().ByLoadingConfigurationMethodsImplicitly();
         }
     
         public void ExplicitInitialization()
         {
             // Will load all configuration methods explicitly defined in the parameter list.
-            Configure
-                .LoadConfigurationMethods(
+            Configure.TheEnvironment()
+                .ByLoadingTheConfigurationMethods(
                     typeof(WindowsRegistryConfigurationMethod),
                     typeof(AppConfigConfigurationMethod),
-                    typeof(MyCustomDatabaseConfigurationMethod))
+                    typeof(MyCustomDatabaseConfigurationMethod));
         }
     }
 }</code></pre>
@@ -113,8 +113,11 @@ Example usage with Ninject
     
     public class NinjectSamples
     {
-        Configure.LoadConfigurationMethodsImplicitly().RegisterConfigurationsWithNinject();
-        var myDependantClass = kernal.Resolve<MyDependantClass>();
+        var kernel = new Kernel();
+        Configure.TheEnvironment()
+            .ByLoadingConfigurationMethodsImplicitly()
+            .ThenRegisteringConfigurationsWithNinject(kernel);
+        var myDependantClass = kernel.Resolve<MyDependantClass>();
         Console.WriteLine(myDependantClass.Configuration.MyConfigurableValue);
     }
 }</code></pre>
