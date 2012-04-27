@@ -1,6 +1,20 @@
 Softweyr.Configuration
 ======================
 
+Overview
+--------
+
+The Softweyr.Configuration component gives a convient method of adding configuration options to a
+library without polluting the consuming classes with Configuration concerns.
+
+Using the Configure class to set up the configuration environment and fetch configurations from
+various data sources using configuration methods can be used to fetch configuration values from
+different sources, for example the App.Config, Web.Config, windows registry, a stored procedure,
+an INI file, an XML file, etc.
+
+Examples
+--------
+
 Simple configuration by attributes implementation.
 
 <pre><code>namespace Softweyr.Configuration.Samples
