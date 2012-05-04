@@ -10,10 +10,12 @@
         {
         }
 
-        public static Configure TheEnvironment()
+        public static void ResetTheEnvironment()
         {
-            return environment;
+            environment = new Configure();
         }
+
+        public static Configure TheEnvironment { get { return environment; } }
 
         public Configure ByLoadingConfigurationMethodsImplicitly()
         {
@@ -25,6 +27,17 @@
         {
             // To Do: Add the specified configuration methods to the environment configure instance.
             throw new NotImplementedException();
+        }
+
+        public TConfiguration Get<TConfiguration>()
+        {
+            // To do: Return an instance of the given configuration.
+            throw new NotImplementedException();
+        }
+
+        public static TConfiguration Get<TConfiguration>()
+        {
+            return environment.Get<TConfiguration>();
         }
     }
 }
