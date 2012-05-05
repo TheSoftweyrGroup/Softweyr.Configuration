@@ -139,7 +139,7 @@ Example usage with Ninject
 Road Map
 --------
 
-<strong>Release 1</strong>
+<strong>Release 1 (<i>In Progress</i>)</strong>
 * Core Configuration Engine
     * Get<>() configuration method.
     * Prioritized population of configuration values.
