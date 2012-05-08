@@ -135,3 +135,30 @@ Example usage with Ninject
         Console.WriteLine(myDependantClass.Configuration.MyConfigurableValue);
     }
 }</code></pre>
+
+Road Map
+--------
+
+<strong>Release 1 (<i>In Progress</i>)</strong>
+* Core Configuration Engine
+    * Get<>() configuration method.
+    * Prioritized population of configuration values.
+* Fluent Initialization
+* Explicit Initialization
+* DefaultTo Configuration Method
+* App.Settings Configuration Method
+* Sample Configuration Method Project
+* Basic Sample Project
+
+<strong>Release 2</strong>
+* Implicit Initialization
+* Hooking mechanism for inversion of control (IOC) engines
+* Ninject implementation of the IOC hooking mechanism
+* Windows Registry Configuration Method
+* Sample project of Implicit Initialization.
+* Sample project of Ninject integration.
+
+<strong>Release 3</strong>
+* XML Configuration Method
+* INI Configuration Method
+* Command Line Arguments Configuration Method
