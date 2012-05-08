@@ -1,6 +1,6 @@
 ﻿namespace Softweyr.Configuration
 {
-    public interface IConfigurationMethod
+    public interface IConfigurationMethodProvider
     {
     }
 }
