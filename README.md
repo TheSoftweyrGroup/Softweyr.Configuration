@@ -39,7 +39,7 @@ Complex configuration by attributes implementation.
     public class MySampleConfiguration
     {
         // This configuration property will always contain the value "To Do.".
-        [DefaultTo("To Do.")]
+        [ConfigureUsingDefaultValue("To Do.")]
         public string MyStaticConfigurationValue { get; set; }
 
         // This configuration property will contain the value of the key-value pair with the key
@@ -47,13 +47,13 @@ Complex configuration by attributes implementation.
         [ConfigureFromAppConfig("SimpleConfigValueKey")]
         public int MyConfigurableValue { get; set; }
 
-        // This configuration property will try to be populated from the windows registry key if it exists,
-        // if not, it will try to get the value from the AppConfigValueKey appSetting in the Web.Config
-        //  / App.Config file for the current ApplicationDomain, if this is also missing then it will
+        // This configuration property will try it will try to get the value from the AppConfigValueKey
+        // appSetting in the Web.Config / App.Config file for the current ApplicationDomain, if not, to
+        // be populated from the windows registry key if it exists, if this is also missing then it will
         // default to "No Value Set.".
-        [ConfigureFromWindowsRegistry(1, "LOCALMACHINE|Software|Softweyr|Sample")]
-        [ConfigureFromAppConfig(2, "AppConfigKeyValue")]
-        [DefaultTo("No value set.")]
+        [ConfigureFromAppConfig("AppConfigKeyValue")]
+        [ConfigureFromWindowsRegistry("LOCALMACHINE|Software|Softweyr|Sample")]
+        [ConfigureUsingDefaultValue("No value set.")]
         public string MyAverageConfigurationValue { get; set; }
         
         // This configuration property will try to be populated from the App.Config / Web.Config file but
