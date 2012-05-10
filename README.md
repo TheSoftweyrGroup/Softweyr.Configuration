@@ -162,10 +162,21 @@ Road Map
     * Prioritized population of configuration values. (Alpha)
 * Fluent Initialization
 * Explicit Initialization (Alpha)
-* DefaultTo Configuration Method (In Progress)
-* App.Settings Configuration Method (In Progress)
-* Sample Configuration Method Project
-* Basic Sample Project
+* DefaultTo Configuration Method (Alpha)
+	* ConfigureUsingDefaultValue (Alpha)
+* Application/Website Configuration File Configuration Method (In Progress)
+	* ConfigureUsingAppConfigAppSetting (In Progress)
+	* ConfigureUsingWebConfigAppSetting (In Progress)
+	* ConfigureUsingAppConfigConnectionString (In Progress)
+	* ConfigureUsingWebConfigConnectionString (In Progress)
+	* ConfigureUsingAppConfigSection
+	* ConfigureUsingWebConfigSection
+	* ConfigureUsingAppConfigXPathValue
+	* ConfigureUsingWebConfigXPathValue
+* Sample Usage Project
+	* Fetching Values Using App.Config
+	* Fetching Values Using Web.Config
+* Sample Custom Configuration Method Project
 
 <strong>Release 2</strong>
 
