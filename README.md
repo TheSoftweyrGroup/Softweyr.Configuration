@@ -81,18 +81,33 @@ Initialization options and simple sample usage.
         public void ImplicitInitialization()
         {
             // Will load all configuration methods currently referenced in the app domain.
-            Configure.TheEnvironment.ByLoadingConfigurationMethodsImplicitly();
+            Configure.AddAllConfigurationMethodProviders();
         }
     
         public void ExplicitInitialization()
         {
             // Will load all configuration methods explicitly defined in the parameter list.
-            Configure.TheEnvironment
-                .ByLoadingConfigurationMethods(
-                    typeof(WindowsRegistryConfigurationMethod),
-                    typeof(AppConfigConfigurationMethod),
-                    typeof(MyCustomDatabaseConfigurationMethod));
+            Configure.AddConfigurationMethodProvider&lt;AppConfigConfigurationMethodProvider&gt;();
+			Configure.AddConfigurationMethodProvider&lt;WindowsRegistry&gt;();
+			Configure.AddConfigurationMethodProvider&lt;MyCustomDatabaseConfigurationMethod&gt;();
         }
+
+		public void ImplicitFluentInitialization()
+		{
+			Configure
+				.TheEnvironment
+				.SoICanDefineAnySetting()
+		}
+
+		public void ExplicitFluentInitialization()
+		{
+			Configure
+				.TheEnvironment
+				.SoICanDefine()
+				.ApplicationConfigurationFileSettings()
+				.RegistryKeySettings()
+				.AndSpecifyDefaultSettings()
+		}
     }
 }</code></pre>
 
@@ -128,9 +143,10 @@ Example usage with Ninject
     public class NinjectSamples
     {
         var kernel = new Kernel();
-        Configure.TheEnvironment()
-            .ByLoadingConfigurationMethodsImplicitly()
-            .ThenRegisteringConfigurationsWithNinject(kernel);
+        Configure
+				.TheEnvironment
+				.SoICanDefineAnySetting()
+				.ThenHookIntoMyNinjectKernel(kernel)
         var myDependantClass = kernel.Resolve<MyDependantClass>();
         Console.WriteLine(myDependantClass.Configuration.MyConfigurableValue);
     }
@@ -140,17 +156,19 @@ Road Map
 --------
 
 <strong>Release 1 (<i>In Progress</i>)</strong>
-* Core Configuration Engine (Pending Commit)
-    * Get<>() configuration method. (Pending Commit)
-    * Prioritized population of configuration values.
+
+* Core Configuration Engine (Alpha)
+    * Get<>() configuration method. (Alpha)
+    * Prioritized population of configuration values. (Alpha)
 * Fluent Initialization
-* Explicit Initialization (Pending Commit)
-* DefaultTo Configuration Method
-* App.Settings Configuration Method
+* Explicit Initialization (Alpha)
+* DefaultTo Configuration Method (In Progress)
+* App.Settings Configuration Method (In Progress)
 * Sample Configuration Method Project
 * Basic Sample Project
 
 <strong>Release 2</strong>
+
 * Implicit Initialization
 * Hooking mechanism for inversion of control (IOC) engines
 * Ninject implementation of the IOC hooking mechanism
@@ -159,6 +177,7 @@ Road Map
 * Sample project of Ninject integration.
 
 <strong>Release 3</strong>
+
 * XML Configuration Method
 * INI Configuration Method
 * Command Line Arguments Configuration Method
