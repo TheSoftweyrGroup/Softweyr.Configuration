@@ -40,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationException.cs" />
     <Compile Include="Configure.cs" />
     <Compile Include="ConfigurationEnvironmentNotInitializedException.cs" />
+    <Compile Include="ConfigureAttribute.cs" />
     <Compile Include="IConfigurationMethodProvider.cs" />
+    <Compile Include="Precedence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderMustSupportAtLeastOneConfigureAttributeType.cs" />
+    <Compile Include="UnsupportedAttributeTypeException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

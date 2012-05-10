@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Softweyr.Configuration
 {
-    public class ConfigurationEnvironmentNotInitializedException : Exception
+    public class ConfigurationEnvironmentNotInitializedException : ConfigurationException
     {
     }
 }
