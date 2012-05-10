@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class ConfigureUnitTests
+    public class ConfigurationCoreTests
     {
         [SetUp]
         public void TestSetUp()
@@ -352,7 +352,7 @@
         public readonly string Value;
 
         public ConfigureGoodMockAttribute(string value)
-            : base(Precedence.Medium)
+            : base(Precedence.Machine)
         {
             this.Value = value;
         }
@@ -363,7 +363,7 @@
         public readonly string Value;
 
         public ConfigureGoodMock2Attribute(string value)
-            : base(Precedence.Medium)
+            : base(Precedence.Machine)
         {
             this.Value = value;
         }
@@ -374,7 +374,7 @@
         public readonly string Value;
 
         public ConfigureGoodMock3Attribute(string value)
-            : base(Precedence.Medium)
+            : base(Precedence.Machine)
         {
             this.Value = value;
         }
@@ -395,7 +395,7 @@
         public readonly string Value;
 
         public HighPrecedenceConfigureAttribute(string value)
-            : base(Precedence.High)
+            : base(Precedence.User)
         {
             this.Value = value;
         }
@@ -406,7 +406,7 @@
         public readonly string Value;
 
         public LowPrecedenceConfigureAttribute(string value)
-            : base(Precedence.Low)
+            : base(Precedence.Global)
         {
             this.Value = value;
         }
