@@ -81,13 +81,13 @@ Initialization options and simple sample usage.
         public void ImplicitInitialization()
         {
             // Will load all configuration methods currently referenced in the app domain.
-            Configure.TheEnvironment().ByLoadingConfigurationMethodsImplicitly();
+            Configure.TheEnvironment.ByLoadingConfigurationMethodsImplicitly();
         }
     
         public void ExplicitInitialization()
         {
             // Will load all configuration methods explicitly defined in the parameter list.
-            Configure.TheEnvironment()
+            Configure.TheEnvironment
                 .ByLoadingConfigurationMethods(
                     typeof(WindowsRegistryConfigurationMethod),
                     typeof(AppConfigConfigurationMethod),
@@ -140,11 +140,11 @@ Road Map
 --------
 
 <strong>Release 1 (<i>In Progress</i>)</strong>
-* Core Configuration Engine
-    * Get<>() configuration method.
+* Core Configuration Engine (Pending Commit)
+    * Get<>() configuration method. (Pending Commit)
     * Prioritized population of configuration values.
 * Fluent Initialization
-* Explicit Initialization
+* Explicit Initialization (Pending Commit)
 * DefaultTo Configuration Method
 * App.Settings Configuration Method
 * Sample Configuration Method Project
