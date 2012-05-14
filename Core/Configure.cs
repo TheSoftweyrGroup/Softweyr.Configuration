@@ -98,8 +98,7 @@
             {
                 var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(new System.Reflection.AssemblyName(Guid.NewGuid().ToString()), System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave);
                 var dynamicModule = dynamicAssembly.DefineDynamicModule(Guid.NewGuid().ToString());
-                var dynamicType = dynamicModule.DefineType(Guid.NewGuid().ToString(), TypeAttributes.Public);
-                dynamicType.AddInterfaceImplementation(typeof(TConfiguration));
+                var dynamicType = dynamicModule.DefineType(Guid.NewGuid().ToString(), TypeAttributes.Public, typeof(MarshalByRefObject), new [] { typeof(TConfiguration) });
                 foreach (var propertyInfo in typeof(TConfiguration).GetProperties())
                 {
                     var fieldName = propertyInfo.Name + Guid.NewGuid().ToString();

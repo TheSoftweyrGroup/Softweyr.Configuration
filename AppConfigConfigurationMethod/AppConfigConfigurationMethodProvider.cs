@@ -28,6 +28,8 @@ namespace Softweyr.Configuration
 
         public bool TryPopulate(object configurationInstance, System.Reflection.PropertyInfo propertyInfo, ConfigureAttribute attribute)
         {
+            var converter = System.ComponentModel.TypeDescriptor.GetConverter(propertyInfo.PropertyType);
+
             if (attribute is ConfigureUsingAppConfigAppSettingAttribute)
             {
                 var configureUsingAppConfigAppSettingAttribute = attribute as ConfigureUsingAppConfigAppSettingAttribute;
@@ -37,18 +39,22 @@ namespace Softweyr.Configuration
                     appSettingName = propertyInfo.Name;
                 }
 
-                var value = appConfig.AppSettings.Settings[appSettingName];
-                if (!appConfig.AppSettings.Settings.AllKeys.Any<string>(new System.Func<string, bool>(key => key.Equals(appSettingName, StringComparison.OrdinalIgnoreCase))))
+                object value;
+                if (appConfig.AppSettings.Settings.AllKeys.Any<string>(new System.Func<string, bool>(key => key.Equals(appSettingName, StringComparison.OrdinalIgnoreCase))))
                 {
-                    // TODO: Check if we need to bother doing this.
-                    value = machineConfig.AppSettings.Settings[appSettingName];
-                    if (!machineConfig.AppSettings.Settings.AllKeys.Any<string>(new System.Func<string, bool>(key => key.Equals(appSettingName, StringComparison.OrdinalIgnoreCase))))
-                    {
-                        return false;
-                    }
+                    value = appConfig.AppSettings.Settings[appSettingName].Value;
                 }
-
-                propertyInfo.SetValue(configurationInstance, value, null);
+                else if (machineConfig.AppSettings.Settings.AllKeys.Any<string>(new System.Func<string, bool>(key => key.Equals(appSettingName, StringComparison.OrdinalIgnoreCase))))
+                {
+                    value = machineConfig.AppSettings.Settings[appSettingName].Value;
+                }
+                else
+                {
+                    return false;
+                }
+                
+                var convertedValue = converter.ConvertFrom(value);
+                propertyInfo.SetValue(configurationInstance, convertedValue, null);
                 return true;
             }
 
