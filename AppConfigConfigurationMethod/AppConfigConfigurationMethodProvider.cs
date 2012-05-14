@@ -28,8 +28,6 @@ namespace Softweyr.Configuration
 
         public bool TryPopulate(object configurationInstance, System.Reflection.PropertyInfo propertyInfo, ConfigureAttribute attribute)
         {
-            var converter = System.ComponentModel.TypeDescriptor.GetConverter(propertyInfo.PropertyType);
-
             if (attribute is ConfigureUsingAppConfigAppSettingAttribute)
             {
                 var configureUsingAppConfigAppSettingAttribute = attribute as ConfigureUsingAppConfigAppSettingAttribute;
@@ -53,7 +51,7 @@ namespace Softweyr.Configuration
                     return false;
                 }
                 
-                var convertedValue = converter.ConvertFrom(value);
+                var convertedValue = attribute.Convert(value, propertyInfo.PropertyType);
                 propertyInfo.SetValue(configurationInstance, convertedValue, null);
                 return true;
             }

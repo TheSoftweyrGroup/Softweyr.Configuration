@@ -164,16 +164,17 @@ Road Map
 * Explicit Initialization (Alpha)
 * DefaultTo Configuration Method (Alpha)
 	* ConfigureUsingDefaultValue (Alpha)
-* Application/Website Configuration File Configuration Method (In Progress)
-	* ConfigureUsingAppConfigAppSetting (In Progress)
-	* ConfigureUsingWebConfigAppSetting (In Progress)
+* Application Configuration File Configuration Method (Alpha)
+	* ConfigureUsingAppConfigAppSetting (Alpha)
 	* ConfigureUsingAppConfigConnectionString (In Progress)
-	* ConfigureUsingWebConfigConnectionString (In Progress)
-	* ConfigureUsingAppConfigSection
+	* ConfigureUsingAppConfigSection (In Progress)
+	* ConfigureUsingAppConfigXPathValue (In Progress)
+* Webpage Configuration File Configuration Method
+	* ConfigureUsingWebConfigAppSetting
+	* ConfigureUsingWebConfigConnectionStrin
 	* ConfigureUsingWebConfigSection
-	* ConfigureUsingAppConfigXPathValue
 	* ConfigureUsingWebConfigXPathValue
-* Sample Usage Project
+* Sample Usage Project (In Progress)
 	* Fetching Values Using App.Config
 	* Fetching Values Using Web.Config
 * Sample Custom Configuration Method Project

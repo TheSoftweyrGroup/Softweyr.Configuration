@@ -54,6 +54,7 @@
     <Compile Include="Precedence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderMustSupportAtLeastOneConfigureAttributeType.cs" />
+    <Compile Include="TypeConverterDelegate.cs" />
     <Compile Include="UnsupportedAttributeTypeException.cs" />
   </ItemGroup>
   <ItemGroup>
