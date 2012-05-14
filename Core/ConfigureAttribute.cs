@@ -5,31 +5,24 @@ namespace Softweyr.Configuration
 {
     public abstract class ConfigureAttribute : System.Attribute
     {
-        private static object DefaultConvertFunction(object sourceValue, Type targetType)
-        {
-            var converter = System.ComponentModel.TypeDescriptor.GetConverter(targetType);
-            return converter.ConvertFrom(sourceValue);
-        }
-
-        protected ConfigureAttribute(Precedence precedence)
+        protected ConfigureAttribute(Precedence precedence, Type typeConverter)
         {
             this.Precedence = precedence;
-            this.ConvertFunction = DefaultConvertFunction;
-        }
+            if (typeConverter.IsSubclassOf(typeof(ITypeConverter)))
+            {
+                throw new ArgumentException("typeConverter must be of type ITypeConverter");
+            }
 
-        protected ConfigureAttribute(Precedence precedence, TypeConverterDelegate convertFunction)
-        {
-            this.Precedence = precedence;
-            this.ConvertFunction = convertFunction;
+            this.ConvertFunction = (ITypeConverter)Activator.CreateInstance(typeConverter);
         }
 
         public Precedence Precedence { get; private set; }
 
-        public TypeConverterDelegate ConvertFunction { get; private set; }
+        private ITypeConverter ConvertFunction { get; set; }
 
         public object Convert(object source, Type targetType)
         {
-            return this.ConvertFunction.Invoke(source, targetType);
+            return this.ConvertFunction.Convert(source, targetType);
         }
     }
 }

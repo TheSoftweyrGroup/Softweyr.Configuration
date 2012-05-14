@@ -15,7 +15,8 @@ namespace Softweyr.Configuration
         public bool TryPopulate(object configurationInstance, System.Reflection.PropertyInfo propertyInfo, ConfigureAttribute attribute)
         {
             var configureDefaultAttribute = attribute as ConfigureUsingDefaultValueAttribute;
-            propertyInfo.SetValue(configurationInstance, configureDefaultAttribute.DefaultValue, null);
+            var convertedValue = attribute.Convert(configureDefaultAttribute.DefaultValue, propertyInfo.PropertyType);
+            propertyInfo.SetValue(configurationInstance, convertedValue, null);
             return true;
         }
     }

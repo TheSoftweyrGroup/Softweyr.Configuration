@@ -352,7 +352,7 @@
         public readonly string Value;
 
         public ConfigureGoodMockAttribute(string value)
-            : base(Precedence.Machine)
+            : base(Precedence.Machine, typeof(DefaultTypeConverter))
         {
             this.Value = value;
         }
@@ -363,7 +363,7 @@
         public readonly string Value;
 
         public ConfigureGoodMock2Attribute(string value)
-            : base(Precedence.Machine)
+            : base(Precedence.Machine, typeof(DefaultTypeConverter))
         {
             this.Value = value;
         }
@@ -374,7 +374,7 @@
         public readonly string Value;
 
         public ConfigureGoodMock3Attribute(string value)
-            : base(Precedence.Machine)
+            : base(Precedence.Machine, typeof(DefaultTypeConverter))
         {
             this.Value = value;
         }
@@ -395,7 +395,7 @@
         public readonly string Value;
 
         public HighPrecedenceConfigureAttribute(string value)
-            : base(Precedence.User)
+            : base(Precedence.User, typeof(DefaultTypeConverter))
         {
             this.Value = value;
         }
@@ -406,7 +406,7 @@
         public readonly string Value;
 
         public LowPrecedenceConfigureAttribute(string value)
-            : base(Precedence.Global)
+            : base(Precedence.Global, typeof(DefaultTypeConverter))
         {
             this.Value = value;
         }
