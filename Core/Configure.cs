@@ -1,4 +1,6 @@
-﻿namespace Softweyr.Configuration
+﻿using System.IO;
+
+namespace Softweyr.Configuration
 {
     using System;
     using System.Linq;
@@ -147,6 +149,25 @@
         public static TConfiguration Get<TConfiguration>()
         {
             return environment.GetConfiguration<TConfiguration>();
+        }
+
+        public void ImplicitlyAddConfigurationMethods()
+        {
+            foreach (var file in Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.TopDirectoryOnly))
+            {
+                Assembly.LoadFile(file);
+            }
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.IsClass && type.GetInterface(typeof(IConfigurationMethodProvider).FullName, false) != null)
+                    {
+                        this.AddConfigurationMethod((IConfigurationMethodProvider)Activator.CreateInstance(type));            
+                    }
+                }
+            }
         }
     }
 }

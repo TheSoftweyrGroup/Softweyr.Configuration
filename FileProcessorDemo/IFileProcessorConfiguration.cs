@@ -9,7 +9,8 @@ namespace FileProcessorDemo
         [ConfigureUsingDefaultValue(20)]
         int NumberOfJobs { get; set; }
 
-        [ConfigureUsingAppConfigAppSetting]
+        [ConfigureUsingAppConfigAppSetting(Precedence.Application + 1)]
+        [ConfigureUsingAppConfigAppSetting("WorkerThreads")]
         [ConfigureUsingDefaultValue(3)]
         int MaxDegreeOfParallelism { get; set; }
 

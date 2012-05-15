@@ -10,11 +10,11 @@ namespace FileProcessorDemo
     {
         static void Main(string[] args)
         {
-            // Configure what methods of configuration we're going to use.
-            Configure.TheEnvironment.AddConfigurationMethod<DefaultConfigurationMethodProvider>();
-            Configure.TheEnvironment.AddConfigurationMethod<AppConfigConfigurationMethodProvider>();
-
+            /* The hard bit */
+            Configure.TheEnvironment.ImplicitlyAddConfigurationMethods();
             var configuration = Configure.Get<IFileProcessorConfiguration>();
+
+            /* The bit you do all the time */
             var myFileProcessor = new FileProcessor(configuration);
             myFileProcessor.ProcessFile();
             Console.WriteLine("Press enter to close.");

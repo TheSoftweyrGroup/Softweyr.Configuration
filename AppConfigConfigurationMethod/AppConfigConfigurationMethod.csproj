@@ -50,6 +50,7 @@
     <Compile Include="AppConfigConfigurationMethodProvider.cs" />
     <Compile Include="AppSettingKeyCannotBeNullOrWhitespaceException.cs" />
     <Compile Include="ConfigureUsingAppConfigAppSettingAttribute.cs" />
+    <Compile Include="ConfigureUsingAppConfigConnectionStringAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

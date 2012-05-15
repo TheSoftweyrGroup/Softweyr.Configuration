@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Softweyr.Configuration
 {
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
     public class ConfigureUsingAppConfigAppSettingAttribute : ConfigureAttribute
     {
         public string AppSettingName { get; private set; }
